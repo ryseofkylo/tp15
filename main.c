@@ -37,18 +37,13 @@ xSemaphoreHandle Sem;
 static void vTarea1(void *pvParameters)
 {
 	extern xSemaphoreHandle Sem;
-	//portTickType xLastWakeTime;
-	//portTickType xPeriod=10/configTICK_RATE_HZ;
 	const char *pcTaskName = "Tarea 1 is running\r\n";
   	uint32_t ul;
-   	//volatile uint32_t ul;
    	/* As per most tasks, this task is implemented in an infinite loop. */
-	//xLastWakeTime=xTaskGetTickCount();
 	const TickType_t xDelay1s=pdMS_TO_TICKS(1000UL);
    	for( ;; ) {
 	if (xSemaphoreTake(Sem,portMAX_DELAY)==pdTRUE){
       	/* Print out the name of this task. */
-	//usleep(1000);
 	printf(pcTaskName);
 	//Board_LED_Toggle(4);
 	vTaskDelay (xDelay1s);
@@ -62,23 +57,15 @@ static void vTarea1(void *pvParameters)
 static void vTarea2(void *pvParameters)
 {
 	extern xSemaphoreHandle Sem;
-
-	//portTickType xLastWakeTime;
-	//portTickType xPeriod=10/configTICK_RATE_HZ;
    	const char *pcTaskName = "Tarea 2 is running\r\n";
     	uint32_t ul;
-   	/* As per most tasks, this task is implemented in an infinite loop. */
-	//xLastWakeTime=xTaskGetTickCount();
-	//const TickType_t xDelay1s=pdMS_TO_TICKS(1000UL);
    	for(;;) {
 	if(xSemaphoreTake(Sem, portMAX_DELAY)==pdTRUE){
       	/* Print out the name of this task. */
 	printf(pcTaskName);
 	Board_LED_Toggle(5);
 	 }xSemaphoreGive(Sem);
-	//vTaskDelay (xDelay1s);
-	/* Delay for a period. */
-     	for( ul = 0; ul < mainDELAY_LOOP_COUNT; ul++ ) {}
+	for( ul = 0; ul < mainDELAY_LOOP_COUNT; ul++ ) {}
    	}
 }
 /*==================[external functions definition]==========================*/
